@@ -1,0 +1,64 @@
+<!-- 
+admin.ejs
+Project
+Revision history
+Sreehari Prathap, Section 6, 2023.11.24: Created  
+ -->
+<%- include('components/header'); -%>
+<body>
+  <%- include('components/navbar'); -%>
+  <main class="posts-wrapper">
+    <div class="admin-actions">
+      <h1 class="post-title center">Welcome to Admin Panel 🖊️</h1>
+      <div class="admin-buttons">
+        <a class="button" href="/create">Add a new page</a>
+        <a class="button delete" href="/logout">Logout</a>
+      </div>
+    </div>
+    <% orders.forEach(order => { %>
+      <li class="order">
+          <div class="info-wrapper order-data-info">
+              <p class="thin">Name: <%= order.name %></p>
+              <p class="thin">Phone: <%= order.phone %></p>
+            </div>
+            <table class="order-data-receipt">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% order.items.forEach(product => { %> <% if (product.itemQuantity
+                > 0) { %>
+                <tr>
+                  <td><%= product.itemName %></td>
+                  <td><%= product.itemQuantity %></td>
+                  <td>$<%= product.itemUnitPrice.toFixed(2) %></td>
+                  <td>$<%= (product.itemUnitPrice * product.itemQuantity).toFixed(2) %></td>
+                </tr>
+                <% } %> <% }); %>
+              </tbody>
+              <br>
+              <tfoot>
+                <tr>
+                  <td colspan="3">Total</td>
+                  <td colspan="1">$<%= (order.total).toFixed(2) %></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Tax (<%= (order.salesTax *100).toFixed(2) %>%)</td>
+                  <td colspan="1">$<%= (order.taxAmount).toFixed(2) %></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Grand Total</td>
+                  <td colspan="1">$<%= (order.total + order.taxAmount).toFixed(2) %></td>
+                </tr>
+              </tfoot>
+            </table>
+      </li>
+    <% }); %>
+  </main>
+  <%- include('components/footer'); -%>
+</body>

@@ -1,0 +1,58 @@
+<!-- 
+edit.ejs
+Project
+Revision history
+Sreehari Prathap, Section 6, 2023.11.24: Created  
+ -->
+ <%- include('components/header'); -%>
+
+ <body>
+     <%- include('components/navbar'); -%>
+    <main class="container">
+      <h2 class="center">Receipt</h2>
+      <div class="receipt-wrapper">
+        <h2 class="bold center">Thank you for purchasing from fruitbae!</h2>
+        <h3 class="bold center">Customer details</h3>
+        <div class="info-wrapper">
+          <p class="bold">Name: <%= receipt.name %></p>
+          <p class="bold">Phone: <%= receipt.phone %></p>
+        </div>
+        <h3 class="bold">Purchase details</h3>
+        <table class="receipt-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% receipt.products.forEach(product => { %> <% if (product.quantity
+            > 0) { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.quantity %></td>
+              <td>$<%= product.price.toFixed(2) %></td>
+              <td>$<%= (product.price * product.quantity).toFixed(2) %></td>
+            </tr>
+            <% } %> <% }); %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Total</td>
+              <td colspan="1">$<%= receipt.subTotal.toFixed(2) %></td>
+            </tr>
+            <tr>
+              <td colspan="3">Tax (13%)</td>
+              <td colspan="1">$<%=receipt.taxAmount.toFixed(2) %></td>
+            </tr>
+            <tr>
+              <td colspan="3">Grand Total</td>
+              <td colspan="1">$<%= (receipt.total).toFixed(2) %></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </main>
+    <%- include('components/footer'); -%>

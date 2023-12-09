@@ -1,0 +1,21 @@
+{
+  "name": "Orkut cms",
+  "version": "1.0.0",
+  "description": "Orkut cms",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "*",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-validator": "*",
+    "mongoose": "^8.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Orkut cms"
+  ],
+  "author": "Sreehari",
+  "license": "ISC"
+}
